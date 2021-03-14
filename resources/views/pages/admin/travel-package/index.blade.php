@@ -18,8 +18,9 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>No</th>
                   <th>Title</th>
+                  <th>Country</th>
                   <th>Location</th>
                   <th>Type</th>
                   <th>Depature Date</th>
@@ -28,10 +29,17 @@
                 </tr>
               </thead>
               <tbody>
+                @php
+                    $no = '0';
+                @endphp
                 @forelse ($items as $item)
+                @php
+                    $no++;
+                @endphp
                 <tr>
-                  <td>{{ $item->id }}</td>
+                  <td>{{ $no }}</td>
                   <td>{{ $item->title }}</td>
+                  <td>{{ $item->country }}</td>
                   <td>{{ $item->location }}</td>
                   <td>{{ $item->type }}</td>
                   <td>{{ $item->departure_date }}</td>
@@ -41,11 +49,11 @@
                       <i class="far fa-edit">
                       </i>
                     </a>
-                    <form action="{{route('travel-package.edit', $item->id)}}" method="post" class="d-inline">
+                    <form action="{{route('travel-package.destroy', $item->id)}}" method="post" class="d-inline">
                       @csrf
                       @method('delete')
                       <button class="btn-danger btn">
-                        <i class="fa fa-trash">
+                        <i class="fa fa-trash"> 
                         </i>
                       </button>
                     </form>

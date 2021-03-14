@@ -10,7 +10,7 @@ class TravelPackage extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'slug', 'location', 'about', 'featured_event',
+        'title', 'slug', 'location','country', 'about', 'featured_event',
         'language', 'food', 'departure_date', 'duration',
         'type', 'price'
     ];
@@ -18,4 +18,10 @@ class TravelPackage extends Model
     protected $hidden = [
         
     ];
+    protected $table = 'travel_packages';
+    
+    public function galleries(){
+        return $this->hasMany(Gallery::class, 'travel_packages_id', 'id');
+    }
+
 }

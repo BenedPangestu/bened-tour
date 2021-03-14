@@ -37,6 +37,10 @@
                     <input type="text" class="form-control" name="location" placeholder="Location" value="{{ old('location') }}">
                 </div>
                 <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" name="country" placeholder="country" value="{{ old('country') }}">
+                </div>
+                <div class="form-group">
                     <label for="about">About</label>
                     <textarea name="about" rows="10" class="d-block w-100 form-control"> {{old('about')}} </textarea>
                 </div>

@@ -16,14 +16,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')
     ->name('Home');
 
-Route::get('/detail', 'DetailController@index')
+Route::get('/detail/{slug}', 'DetailController@index')
     ->name('Detail');
 
-Route::get('/checkout', 'CheckoutController@index')
-    ->name('Checkout');
+Route::post('/checkout/{id}', 'CheckoutController@proses')
+            ->name('checkout_proses')
+            ->middleware(['auth', 'verified']);
 
- Route::get('/checkout/succes', 'CheckoutController@succes')
-    ->name('Checkout Succes');
+Route::get('/checkout/{id}', 'CheckoutController@index')
+            ->name('Checkout')
+            ->middleware(['auth', 'verified']);
+
+Route::post('/checkout/create/{detail_id}', 'CheckoutController@create')
+            ->name('checkout_create')
+            ->middleware(['auth', 'verified']);
+
+Route::get('/checkout/remove/{detail_id}', 'CheckoutController@remove')
+            ->name('checkout_remove')
+            ->middleware(['auth', 'verified']);
+
+Route::get('/checkout/confirm/{id}', 'CheckoutController@succes')
+            ->name('checkout_succes')
+            ->middleware(['auth', 'verified']);
+
+
 
 Route::prefix('admin')
         ->namespace('admin')
@@ -33,5 +49,7 @@ Route::prefix('admin')
             ->name('dashboard');
 
             Route::resource('travel-package', 'TravelPackageController');
+            Route::resource('gallery', 'GalleryController');
+            Route::resource('transaction', 'TransactionController');
         });
 Auth::routes(['verify' => true]);
